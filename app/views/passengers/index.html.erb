@@ -1,0 +1,8 @@
+<h1> Passengers Index </h1>
+
+<% @passengers.each do |passenger| %>
+  <section class='passenger-<%= passenger.id %>'>
+    <p><%= passenger.name %></p>
+    <ul>Number of flights for this passenger: <%= passenger.flights.count %></ul>
+  </section>
+<% end %>
