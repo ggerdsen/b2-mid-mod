@@ -48,7 +48,7 @@ RSpec.describe "Flights index page" do
     expect(page).to have_content("#{@passenger_5.name}")
   end
   
-  it "When I visit a flight index page, I see all flight numbers and passengers" do
+  it "When I visit a flight index page, I can remove passengers from a flight" do
   
     visit "/flights"
     
