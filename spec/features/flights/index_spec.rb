@@ -47,4 +47,46 @@ RSpec.describe "Flights index page" do
     expect(page).to have_content("#{@passenger_4.name}")
     expect(page).to have_content("#{@passenger_5.name}")
   end
+  
+  it "When I visit a flight index page, I see all flight numbers and passengers" do
+  
+    visit "/flights"
+    
+    expect(page).to have_content("#{@passenger_1.name}")
+    expect(page).to have_content("#{@passenger_2.name}")
+    expect(page).to have_content("#{@passenger_3.name}")
+    expect(page).to have_content("#{@passenger_4.name}")
+    expect(page).to have_content("#{@passenger_5.name}")
+    
+    expect(page).to have_link("Remove From Flight")
+
+    click_link("Remove From Flight", match: :first)
+    
+    expect(current_path).to eq("/flights")
+
+    expect(page).to_not have_content("#{@passenger_1.name}")
+    expect(page).to have_content("#{@passenger_2.name}")
+    expect(page).to have_content("#{@passenger_3.name}")
+    expect(page).to have_content("#{@passenger_4.name}")
+    expect(page).to have_content("#{@passenger_5.name}")
+    
+    click_link("Remove From Flight", match: :first)
+    
+    expect(current_path).to eq("/flights")
+    
+    expect(page).to_not have_content("#{@passenger_1.name}")
+    expect(page).to_not have_content("#{@passenger_2.name}")
+    expect(page).to have_content("#{@passenger_3.name}")
+    expect(page).to have_content("#{@passenger_4.name}")
+    expect(page).to have_content("#{@passenger_5.name}")
+  end
+  
+  # User Story 3, Remove a Passenger from a Flight
+  # As a visitor
+  # When I visit the flights index page
+  # Next to each passengers name
+  # I see a link to remove that passenger from that flight
+  # When I click on that link
+  # I'm returned to the flights index page
+  # And I no longer see that passenger listed under that flight
 end
